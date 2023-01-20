@@ -46,7 +46,15 @@ public class Oscillator : MonoBehaviour
         for (int i = 0; i < data.Length; i += channels) {
             phase += increment;
             // this is where we copy audio data to make them “available” to Unity
-            data[i] = (float)(gain * Mathf.Sin((float)phase));
+            // data[i] = (float)(gain * Mathf.Sin((float)phase));
+
+            // Square wave
+            if (phase < Mathf.PI) {
+                data[i] = (float)(gain * 1.0);
+            } else {
+                data[i] = (float)(gain * -1.0);
+            }
+
             // if we have stereo, we copy the mono data to each channel
             if (channels == 2) data[i + 1] = data[i];
             if (phase > (Mathf.PI * 2)) phase = 0.0;
