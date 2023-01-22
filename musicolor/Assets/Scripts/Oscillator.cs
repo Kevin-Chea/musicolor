@@ -7,7 +7,7 @@ public class Oscillator : MonoBehaviour
     public double frequency = 440.0;
     private double increment;
     private double phase;
-    private double sampling_frequency = 44000.0;
+    private double sampling_frequency = 44100.0;
 
     public float gain;
     public float volume = 0.05f;
@@ -28,7 +28,7 @@ public class Oscillator : MonoBehaviour
     }
 
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.Space)) {
+        /*if (Input.GetKeyDown(KeyCode.Space)) {
             gain = volume;
             frequency = frequencies[thisFrequency];
             thisFrequency++;
@@ -38,7 +38,7 @@ public class Oscillator : MonoBehaviour
         }
         if (Input.GetKeyUp(KeyCode.Space)) {
             gain = 0.0f;
-        }
+        }*/
     }
 
     private void OnAudioFilterRead(float[] data, int channels) {

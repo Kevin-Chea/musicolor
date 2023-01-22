@@ -5,11 +5,6 @@ using UnityEngine;
 public class MouseController : MonoBehaviour
 {
     public GameObject selectedObject = null;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -26,8 +21,14 @@ public class MouseController : MonoBehaviour
                 }
                 else if (hit.transform.gameObject.tag == "color") {
                     // Apply color to selected object
-                    ApplyColor(hit.transform.gameObject.GetComponent<Renderer>().material.color);
+                    ApplyColor(hit.transform.gameObject.GetComponent<ColorPicker>().GetColor());
                 }
+                else {
+                    DeselectObject(selectedObject);
+                }
+            }
+            else {
+                DeselectObject(selectedObject);
             }
         }
     }
@@ -44,15 +45,17 @@ public class MouseController : MonoBehaviour
     }
 
     void DeselectObject(GameObject obj) {
+        if (obj == null)
+            return;
         Light halo = obj.GetComponent<Light>();
         if (halo != null)
             halo.enabled = false;
         selectedObject = null;
     }
 
-    void ApplyColor(Color color) {
+    void ApplyColor(Colors color) {
         if (selectedObject != null) {
-            selectedObject.GetComponent<Renderer>().material.color = color;
+            selectedObject.GetComponent<Petal>().SetColor(color);
         }
     }
 }
