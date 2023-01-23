@@ -17,17 +17,12 @@ public class Flower : MonoBehaviour
 
     private bool isPlaying = false;
 
-    // Update is called once per frame
-    void Update()
+    public void PlayMusic()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && !isPlaying)
-        {
-            
-            StartCoroutine(PlayMusic());
-        }
+        StartCoroutine(Play());
     }
 
-    IEnumerator PlayMusic()
+    public IEnumerator Play()
     {
         isPlaying = true;
 
@@ -38,10 +33,10 @@ public class Flower : MonoBehaviour
             Colors color = petal.GetComponent<Petal>().color;
             // Get the sound associated to the color
             frequency = ColorSound.GetSoundFrequencyFromColor(color);
-            Debug.Log(frequency);
+            // Debug.Log(frequency);
             gain = volume;
             // Play the sound
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.5f);
             gain = 0f;
         }
         isPlaying = false;
@@ -50,7 +45,7 @@ public class Flower : MonoBehaviour
     private void OnAudioFilterRead(float[] data, int channels)
     {
         increment = frequency * 2.0 * Mathf.PI / sampling_frequency;
-        Debug.Log("Increment: " + increment);
+        // Debug.Log("Increment: " + increment);
         for (int i = 0; i < data.Length; i += channels) {
             phase += increment;
 
@@ -65,5 +60,10 @@ public class Flower : MonoBehaviour
             if (channels == 2) data[i + 1] = data[i];
             if (phase > (Mathf.PI * 2)) phase = 0.0;
         }
+    }
+
+    public bool IsPlaying()
+    {
+        return isPlaying;
     }
 }
