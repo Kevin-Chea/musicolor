@@ -6,6 +6,13 @@ In this game, you can color the petals. Clic on a petal and on a color.
 Each color is associated to a sound. By coloring the flowers, you are creating a music.
 Press "Play Music" to hear your creation !
 
+## Possible future improvements :
+- Change the sounds
+- Add more sounds
+- Add chords
+- UI
+- different draws to colore
+
 ## Settings 
 ### Light :
 
